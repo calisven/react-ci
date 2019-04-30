@@ -1,0 +1,19 @@
+
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]
+
+# VOLUMES
+# docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app /abc123
+                          # Don't map node_modules to the real HD - use the copy in Docker /app/node_modules
+                                                # Map HD cwd to /app in container
+
+# docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app c9a7a11a56b7
