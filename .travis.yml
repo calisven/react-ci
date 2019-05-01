@@ -1,0 +1,15 @@
+# We need superuse permissions to execute this command
+sudo: required
+# Hey Travis, get a copy of Docker
+services:
+  - docker
+
+before_install:
+  # In this file, you can actually use whatever tag you want, but 
+  # it's good practice to still use the real tag convention
+  - docker build -t svenrivera/react-ci -f Dockerfile.dev .
+
+script:
+  # The default behavior of React's testing suite is to wait for
+  # user input - running coverage analysis stops that from happening
+  - docker run svenrivera/react-ci npm run test -- --coverage
