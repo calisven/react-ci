@@ -12,4 +12,4 @@ before_install:
 script:
   # The default behavior of React's testing suite is to wait for
   # user input - running coverage analysis stops that from happening
-  - docker run svenrivera/react-ci npm run test -- --coverage
+  - docker run -e CI=true svenrivera/react-ci npm run test -- --watchAll=false
