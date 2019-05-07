@@ -13,3 +13,23 @@ script:
   # The default behavior of React's testing suite is to wait for
   # user input - running coverage analysis stops that from happening
   - docker run -e CI=true svenrivera/react-ci npm run test -- --watchAll=false
+
+# Section for how to deploy this project in AWS Elastic Beanstalk
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  # Must match the exact app name found in elastic beanstalk after the "App Applications" section
+  # It is the FIRST item after.
+  app: "docker-ci"
+  # SECOND item after
+  env: "DockerCi-env"
+  # The S3 bucket name automatically created for you when you make an EB instance
+  bucket_name: "elasticbeanstalk-us-east-2-247239587564"
+  bucket_path: docker-ci # Matches the 'app' name above
+  on: # Only deploy when the branch name is 'master'
+    branch: Master
+  # Create these in IAM AWS role as all access for elasticbeanstalk type
+  # Add them to Travis CI dashboard with the environment variable names below
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
