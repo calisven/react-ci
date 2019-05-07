@@ -27,7 +27,7 @@ deploy:
   bucket_name: "elasticbeanstalk-us-east-2-247239587564"
   bucket_path: docker-ci # Matches the 'app' name above
   on: # Only deploy when the branch name is 'master'
-    branch: Master
+    branch: master
   # Create these in IAM AWS role as all access for elasticbeanstalk type
   # Add them to Travis CI dashboard with the environment variable names below
   access_key_id: $AWS_ACCESS_KEY
